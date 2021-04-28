@@ -10,10 +10,53 @@ const initialState=[{
 
 function App() {
 
-  const [todos]= useReducer(reducer,initialState)
+  const [todos]= useReducer(todoReducer,initialState)
   return (
     <>
-      <h1>TodoApp</h1>
+      <h1>TodoApp({todos.length})</h1>
+      <hr/>
+      <div className="row">
+        <div className="col-7">
+
+          <ul className="list-group list-group-flush">
+            {
+              todos.map((todo, i)=>(
+              <li
+                key={todo.id}
+                className="list-group-item"
+                >
+                  <p className="text-center">{i+1}. {todo.desc}</p>
+                  <button
+                  className="btn btn-danger">
+                    Borrar
+                  </button>
+                  
+                  
+                  </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div className="col-5">
+          <h4>Agregar TODO</h4>
+          <hr/>
+
+          <form>
+            <input
+            placeholder="Aprender..."
+            name="description"
+            className="form-control"
+            type="text"
+            autoComplete="off"/>
+
+            <button
+              className="btn btn-outline-primary mtn-1 btn-block">
+                Agregar
+            </button>
+          </form>
+
+        </div>
+      </div>
     </>
   );
 }
